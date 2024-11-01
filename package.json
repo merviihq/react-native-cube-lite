@@ -1,6 +1,7 @@
 {
-  "name": "react-native-cube-lite",
-  "version": "0.1.0",
+  "name": "@merviihq/react-native-cube-lite",
+  "version": "0.0.0-beta",
+  "private":false,
   "description": "React-native cube ",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
