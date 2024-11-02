@@ -107,6 +107,7 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION"
+          echo "Hello world"
           echo "Auth=${{secrets.NPM_TOKEN}}"
           npm publish --access public
         env:
