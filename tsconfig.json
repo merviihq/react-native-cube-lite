@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-cube-lite": ["./src/index"]
+      "@merviihq/react-native-cube-lite": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
