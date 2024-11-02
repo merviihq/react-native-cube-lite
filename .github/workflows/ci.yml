@@ -84,12 +84,17 @@ jobs:
 
   publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Clean for Build
         run: yarn clean
@@ -108,7 +113,7 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION"
           echo "Auth=${{secrets.NPM_TOKEN}}"
-          npm publish --access public
+          npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
