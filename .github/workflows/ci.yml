@@ -50,37 +50,37 @@ jobs:
       - name: Build package
         run: yarn prepare
 
-  build-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # build-release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Setup
-        uses: ./.github/actions/setup
+  #     - name: Setup
+  #       uses: ./.github/actions/setup
 
-      - name: Get version from package.json
-        id: get_version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "version=$VERSION" >> $GITHUB_ENV
+  #     - name: Get version from package.json
+  #       id: get_version
+  #       run: |
+  #         VERSION=$(node -p "require('./package.json').version")
+  #         echo "version=$VERSION" >> $GITHUB_ENV
 
-      - name: Create Git tag
-        run: |
-          git tag -a "v${{ env.version }}" -m "Release v${{ env.version }}"
-          git push origin "v${{ env.version }}"
+  #     - name: Create Git tag
+  #       run: |
+  #         git tag -a "v${{ env.version }}" -m "Release v${{ env.version }}"
+  #         git push origin "v${{ env.version }}"
 
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        with:
-          tag_name: "v${{ env.version }}"
-          release_name: "v${{ env.version }}"
-          body: |
-            Release v${{ env.version }} includes the latest updates and fixes.
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GT_TOKEN }}
+  #     - name: Create GitHub Release
+  #       uses: actions/create-release@v1
+  #       with:
+  #         tag_name: "v${{ env.version }}"
+  #         release_name: "v${{ env.version }}"
+  #         body: |
+  #           Release v${{ env.version }} includes the latest updates and fixes.
+  #         draft: false
+  #         prerelease: false
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GT_TOKEN }}
 
   publish-npm:
     runs-on: ubuntu-latest
@@ -90,10 +90,27 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+
+      - name: Clean for Build
+        run: yarn clean
+
+      - name: Build package
+        run: yarn prepare
+
+      # - name: Release package
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.GT_TOKEN }}
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: yarn release
+
       - name: Publish package to NPM
-        run: npm publish
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION"
+          echo "Auth=${{secrets.NPM_TOKEN}}"
+          npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   build-web:
     runs-on: ubuntu-latest
