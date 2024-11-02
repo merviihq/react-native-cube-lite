@@ -100,11 +100,11 @@ jobs:
       - name: Build package
         run: yarn prepare
 
-      # - name: Release package
-      #   env:
-      #     GITHUB_TOKEN: ${{secrets.GT_TOKEN }}
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: yarn release
+      - name: Release package
+        env:
+          GITHUB_TOKEN: ${{secrets.GT_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn release
 
 
       # - name: Publish package to NPM
