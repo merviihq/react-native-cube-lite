@@ -84,6 +84,9 @@ jobs:
 
   publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -103,15 +106,15 @@ jobs:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       #   run: yarn release
 
-      - name: Publish package to NPM
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "version=$VERSION"
-          echo "Hello world"
-          echo "Auth=${{secrets.NPM_TOKEN}}"
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      # - name: Publish package to NPM
+      #   run: |
+      #     VERSION=$(node -p "require('./package.json').version")
+      #     echo "version=$VERSION"
+      #     echo "Auth=${{secrets.NPM_TOKEN}}"
+      #     npm publish --provenance --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   build-web:
     runs-on: ubuntu-latest
