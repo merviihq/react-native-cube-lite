@@ -5,13 +5,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CubeLite
-        publicKey="CU_PK_TEST-TujzMiXszaXEIGep4kXgqgp"
+        publicKey="CU_PK_TEST-TujzMiXszaXEIGep4kXgqgpa9vquZ952TZ11wiMO"
         amount={200.9}
         customerEmail="developers@mervii.com"
         customerName="Mervii Developer"
         customerPhone="07045417072"
-        handleDelivery={true}
-        chargeDelivery={true}
+        handleDelivery={false}
+        chargeDelivery={false}
         onCancel={(data: any) => console.log(JSON.stringify(data))}
         onFailed={(data: any) => console.log(JSON.stringify(data))}
         onError={(data: any) => console.log(JSON.stringify(data))}
@@ -37,6 +37,7 @@ export default function App() {
           formattedAddress: '95 Poly Road Sango, Ibadan 200132, Oyo, Nigeria',
         }}
         customButtonProps={{}}
+        // modalTransparent={false}
       />
     </View>
   );
