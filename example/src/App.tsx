@@ -5,7 +5,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CubeLite
-        publicKey="CU_PK_TEST-TujzMiXszaXEIGep4kXgqgpa9vquZ952TZ11wiMO"
+        publicKey="CU_PK_TEST-TujzMiXszaXEIGep4kXgqgp"
         amount={200.9}
         customerEmail="developers@mervii.com"
         customerName="Mervii Developer"
