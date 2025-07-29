@@ -1,17 +1,43 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from '@merviihq/react-native-cube-lite';
+import { StyleSheet, View } from 'react-native';
+import CubeLite from '@merviihq/react-native-cube-lite';
 
 export default function App() {
-  const [result, setResult] = useState<number | undefined>();
-
-  useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <CubeLite
+        publicKey="CU_PK_TEST-TujzMiXszaXEIGep4kXgqgpa9vquZ952TZ11wiMO"
+        amount={200.9}
+        customerEmail="developers@mervii.com"
+        customerName="Mervii Developer"
+        customerPhone="07045417072"
+        handleDelivery={true}
+        chargeDelivery={true}
+        onCancel={(data: any) => console.log(JSON.stringify(data))}
+        onFailed={(data: any) => console.log(JSON.stringify(data))}
+        onError={(data: any) => console.log(JSON.stringify(data))}
+        onSuccess={(data: any) => console.log(JSON.stringify(data))}
+        buttonTitle="Pay Now !"
+        pickupLocation={{
+          region: {
+            latitude: 7.427026700000001,
+            longitude: 3.8900142,
+          },
+          city: 'Ibadan',
+          state_code: 'YO',
+          country_code: 'NG',
+          contacts: {
+            name: 'John Done',
+            phone_number: '07045417072',
+            phone_number_2: '',
+            email: 'sales@mervii.com',
+          },
+          pickup_date: '09-07-2024',
+          pickup_time: '03:40PM',
+          pickup_note: 'Ask for John',
+          formattedAddress: '95 Poly Road Sango, Ibadan 200132, Oyo, Nigeria',
+        }}
+        customButtonProps={{}}
+      />
     </View>
   );
 }
