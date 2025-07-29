@@ -54,7 +54,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.19.3, @babel/core@npm:^7.20.0, @babel/core@npm:^7.23.9, @babel/core@npm:^7.25.2":
+"@babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.20.0, @babel/core@npm:^7.23.9, @babel/core@npm:^7.25.2":
   version: 7.28.0
   resolution: "@babel/core@npm:7.28.0"
   dependencies:
@@ -7073,20 +7073,6 @@ __metadata:
   checksum: 1ffe3bb22a6d51bdeb6bf6f7cf97d2ff4a74b017ad12284cc9e6a279e727dc30a5de6bb613e5596ff4dc3e517841339ad09a7eec44266eccb1aa201a30448166
   languageName: node
   linkType: hard
-
-"example-app@workspace:example-app":
-  version: 0.0.0-use.local
-  resolution: "example-app@workspace:example-app"
-  dependencies:
-    "@babel/core": ^7.19.3
-    expo: ^53.0.4
-    react: 19.0.0
-    react-dom: 19.0.0
-    react-native: 0.79.1
-    react-native-builder-bob: ^0.30.3
-    react-native-web: ^0.20.0
-  languageName: unknown
-  linkType: soft
 
 "exec-async@npm:^2.2.0":
   version: 2.2.0
