@@ -7,8 +7,10 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version-file: .nvmrc
-        registry-url: 'https://registry.npmjs.org'
+        # directly specify the version (or a semver range)
+        node-version: '18.x'
+        # enable built‑in Yarn caching
+        cache: 'yarn'
 
     - name: Cache dependencies
       id: yarn-cache
@@ -26,3 +28,38 @@ runs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn install --immutable
       shell: bash
+
+
+
+
+
+
+
+# name: Setup
+# description: Setup Node.js and install dependencies
+
+# runs:
+#   using: composite
+#   steps:
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version-file: .nvmrc
+#         registry-url: 'https://registry.npmjs.org'
+
+#     - name: Cache dependencies
+#       id: yarn-cache
+#       uses: actions/cache@v3
+#       with:
+#         path: |
+#           **/node_modules
+#           .yarn/install-state.gz
+#         key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**/package.json', '!node_modules/**') }}
+#         restore-keys: |
+#           ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+#           ${{ runner.os }}-yarn-
+
+#     - name: Install dependencies
+#       if: steps.yarn-cache.outputs.cache-hit != 'true'
+#       run: yarn install --immutable
+#       shell: bash
