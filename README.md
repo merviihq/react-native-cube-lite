@@ -4,14 +4,11 @@ react native cube sdk for delivery and payment
 
 ## Installation
 
-
 ```sh
 npm install '@merviihq/react-native-cube-lite'
 ```
 
-
 ## Usage
-
 
 ```js
 import { View, StyleSheet } from 'react-native';
@@ -22,7 +19,7 @@ import CubeLite from '@merviihq/react-native-cube-lite';
 export default function App() {
   return (
     <View style={[styles.container,{alignItems:'center'}]}>
-     
+
       <CubeLite
         publicKey='CU_PK_TEST-T'
         amount={200.90}
@@ -58,7 +55,7 @@ export default function App() {
 
       />
     </View>
-    
+
   );
 }
 
@@ -70,7 +67,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
-
 
 ## Contributing
 
