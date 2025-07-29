@@ -108,6 +108,7 @@ export default function CubeLite(props: Props) {
 
   const messageReceived = async (rawData: any) => {
     // setValues(prev => ({ ...prev, visible: false, loading: false }));
+    // let timeoutId: ReturnType<typeof setTimeout>;
     let webResponse;
     try {
       webResponse = JSON.parse(rawData);
@@ -121,10 +122,13 @@ export default function CubeLite(props: Props) {
     const { type, data: payload }: cubeResp = webResponse;
     const handlers = {
       error: () => props.onError && props.onError(payload),
-      cancel: () => props.onCancel(payload),
-      failed: () =>
-        props.onFailed({ error: 'Transaction failed', data: webResponse }),
+      cancel: () => {
+        setValues((prev) => ({ ...prev, visible: false, loading: false }));
+        props.onCancel(payload);
+      },
+      failed: () => props.onFailed(payload),
       success: () => {
+        setValues((prev) => ({ ...prev, visible: false, loading: false }));
         if (props.onSuccess) return props.onSuccess(payload);
         return webResponse;
       },
@@ -178,25 +182,24 @@ export default function CubeLite(props: Props) {
           originWhitelist={['*']}
           source={{ html: htmlContent }}
           onMessage={(e) => {
-            console.log(JSON.stringify({ e }));
             messageReceived(e.nativeEvent.data);
           }}
-          style={[{}, props.webViewStyle]}
-          scalesPageToFit={true}
+          style={[props.webViewStyle]}
+          // scalesPageToFit={true}
           javaScriptEnabled={true}
-          automaticallyAdjustContentInsets={false}
+          // automaticallyAdjustContentInsets
           onLoadStart={() => handleOnChange('loading', true)}
           onLoadEnd={() => handleOnChange('loading', false)}
-          mixedContentMode="always"
-          injectedJavaScriptBeforeContentLoaded={`(function() {
-              var meta = document.createElement('meta');
-              meta.setAttribute('name', 'viewport');
-              meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover');
-              document.head.appendChild(meta);
-              var style = document.createElement('style');
-              style.innerHTML = 'html, body { width:100%; height:100%; margin:0; padding:0; overflow:hidden; } #cube-container { width:100%; height:100%; }';
-              document.head.appendChild(style);
-            })();`}
+          // mixedContentMode="always"
+          // injectedJavaScriptBeforeContentLoaded={`(function() {
+          //     var meta = document.createElement('meta');
+          //     meta.setAttribute('name', 'viewport');
+          //     meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover');
+          //     document.head.appendChild(meta);
+          //     var style = document.createElement('style');
+          //     style.innerHTML = 'html, body { width:100%; height:100%; margin:0; padding:0; overflow:hidden; } #cube-container { width:100%; height:100%; }';
+          //     document.head.appendChild(style);
+          //   })();`}
           {...props.webViewProps}
         />
         {loading && (

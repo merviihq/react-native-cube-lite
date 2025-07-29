@@ -91,6 +91,7 @@
     "react-native": "*"
   },
   "workspaces": [
+    "example-app",
     "example"
   ],
   "packageManager": "yarn@3.6.1",
